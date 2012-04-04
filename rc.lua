@@ -213,6 +213,11 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86AudioPrev", function() awful.util.spawn("cmus-remote --prev") end ),
     awful.key({}, "XF86AudioPlay", function() awful.util.spawn("cmus-remote --pause") end ),
 
+    -- Lock screen
+    awful.key({ "Mod1", "Control" }, "l", function() awful.util.spawn("slimlock") end),
+
+
+    -- Window/Tag control
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
