@@ -160,7 +160,7 @@ at_reverseoff=%{$'\e[27m'%}
 at_strikeoff=%{$'\e[29m'%}
  
  
-PROMPT="${fg_green}%n@%m${fg_white} ${fg_lblue}%~${fg_white} ${fg_black}$ "
+PROMPT="${fg_green}%n@%m${fg_white} ${fg_lblue}%~${fg_white} ${fg_black}$ ${fg_black}"
 
 #Keybindings
 bindkey "\e[1~" beginning-of-line # Home
