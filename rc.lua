@@ -108,17 +108,25 @@ mysystray = widget({ type = "systray" })
 
 -- Volume widget
 volwidget = widget({type = "textbox" })
-vicious.register(volwidget, vicious.widgets.volume, "Volume: $1% | ", 0.1, "Master")
+vicious.register(volwidget, vicious.widgets.volume,
+	function(widget, args)
+		if args[1] == 0 or args[2] == "♩" then
+			return "Volume: " .. "off"
+		else
+			return "Volume: " .. args[1] .. "%"
+		end
+	end, 0.1, "Master")
 
 -- MPD widget
 mpdwidget = widget({type = "textbox" })
-vicious.register(mpdwidget, vicious.widgets.mpd, function (widget, args)
-	if args["{state}"] == "Stop" then 
-		return " - "
-	else 
-                return args["{Artist}"]..' - '.. args["{Title}"] .. " | "
-        end
-    end, 1)
+vicious.register(mpdwidget, vicious.widgets.mpd,
+	function (widget, args)
+		if args["{state}"] == "Stop" then 
+			return " - "
+		else 
+                	return args["{Artist}"]..' - '.. args["{Title}"] .. " | "
+        	end
+    	end, 1)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
