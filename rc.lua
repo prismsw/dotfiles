@@ -106,9 +106,19 @@ mysystray = widget({ type = "systray" })
 -- cpuwidget = widget({ type = "textbox" })
 -- vicious.register(cpuwidget, vicious.widgets.cpu, "$1% $2% $3% $4%")
 
--- Volume Widget
+-- Volume widget
 volwidget = widget({type = "textbox" })
-vicious.register(volwidget, vicious.widgets.volume, "Volume: $1% ", 0.1, "Master")
+vicious.register(volwidget, vicious.widgets.volume, "Volume: $1% | ", 0.1, "Master")
+
+-- MPD widget
+mpdwidget = widget({type = "textbox" })
+vicious.register(mpdwidget, vicious.widgets.mpd, function (widget, args)
+	if args["{state}"] == "Stop" then 
+		return " - "
+	else 
+                return args["{Artist}"]..' - '.. args["{Title}"] .. " | "
+        end
+    end, 10)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -187,6 +197,7 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
 	volwidget,
+	mpdwidget,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
