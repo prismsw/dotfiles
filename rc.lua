@@ -220,9 +220,9 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86AudioRaiseVolume", function() awful.util.spawn("amixer set Master 2%+") end ),
     awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("amixer set Master 2%-") end ),
     -- Needs to be adapted for the preferred music player
-    awful.key({}, "XF86AudioNext", function() awful.util.spawn("cmus-remote --next") end ),
-    awful.key({}, "XF86AudioPrev", function() awful.util.spawn("cmus-remote --prev") end ),
-    awful.key({}, "XF86AudioPlay", function() awful.util.spawn("cmus-remote --pause") end ),
+    awful.key({}, "XF86AudioNext", function() awful.util.spawn("mpc next") end ),
+    awful.key({}, "XF86AudioPrev", function() awful.util.spawn("mpc prev") end ),
+    awful.key({}, "XF86AudioPlay", function() awful.util.spawn("mpc toggle") end ),
 
     -- Lock screen
     awful.key({ "Mod1", "Control" }, "l", function() awful.util.spawn("slimlock") end),
