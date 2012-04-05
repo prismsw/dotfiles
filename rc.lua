@@ -118,7 +118,7 @@ vicious.register(mpdwidget, vicious.widgets.mpd, function (widget, args)
 	else 
                 return args["{Artist}"]..' - '.. args["{Title}"] .. " | "
         end
-    end, 10)
+    end, 1)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
