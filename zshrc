@@ -157,9 +157,11 @@ at_underloff=%{$'\e[24m'%}
 at_blinkoff=%{$'\e[25m'%}
 at_reverseoff=%{$'\e[27m'%}
 at_strikeoff=%{$'\e[29m'%}
+#Reset
+reset_color=%{$reset_color%}
  
  
-PROMPT="${fg_green}%n@%m${fg_white} ${fg_lblue}%~${fg_white} ${fg_black}$ ${fg_black}"
+PROMPT="${fg_green}%n@%m${fg_white} ${fg_lblue}%~${reset_color} $ "
 
 #Keybindings
 bindkey "\e[1~" beginning-of-line # Home
