@@ -10,6 +10,9 @@ xrdb -merge ~/.Xresources
 # Start pulseaudio
 start-pulseaudio-x11
 
+# Start mpd
+mpd
+
 # Fix keyboard layout
 setxkbmap -layout de -variant nodeadkeys
 
