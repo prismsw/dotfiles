@@ -39,7 +39,7 @@ end
 beautiful.init("/usr/share/awesome/themes/portal/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "roxterm"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
