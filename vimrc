@@ -1,4 +1,4 @@
-colorscheme desert
+colorscheme default
 
 filetype plugin indent on
 syntax on
