@@ -2,7 +2,6 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 alias ls='ls --color=auto'
 alias pacman='pacman-color'
-alias weechat='su irc -c "weechat-curses"'
 
 alias sudo='nocorrect noglob do_sudo '
 
