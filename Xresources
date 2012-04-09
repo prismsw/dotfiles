@@ -1,10 +1,11 @@
-
+*foreground: #ffffff
 
 ! URxvt settings
 URxvt.perl-ext-common: default,matcher,vtwheel
 URxvt.urlLauncher: chromium
 URxvt.matcher.button: 1
 URxvt.depth: 32
-URxvt.background: #e4e4e3
+URxvt.background: rgba:0000/0000/0000/dddd
 URxvt.scrollBar: off
+URxvt.internalBorder: 7
 URxvt*font: xft:DejaVu Sans Mono:pixelsize=13:antialias=true:hinting=true
