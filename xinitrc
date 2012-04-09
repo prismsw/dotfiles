@@ -17,7 +17,7 @@ mpd
 setxkbmap -layout de -variant nodeadkeys
 
 # Composite manager for transparency
-xcompgr &
+xcompmgr &
 
 # Start awesome
 exec awesome
