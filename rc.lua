@@ -115,7 +115,7 @@ mysystray = widget({ type = "systray" })
 -- vicious.register(cpuwidget, vicious.widgets.cpu, "$1% $2% $3% $4%")
 
 -- Volume widget
-volwidget = widget({type = "textbox" })
+volwidget = widget({ type = "textbox" })
 vicious.register(volwidget, vicious.widgets.volume,
 	function(widget, args)
 		if args[1] == 0 or args[2] == "♩" then
@@ -135,6 +135,22 @@ vicious.register(mpdwidget, vicious.widgets.mpd,
                 	return args["{Artist}"]..' - '.. args["{Title}"] .. " | "
         	end
     	end, 1)
+
+-- Backup widget
+backupwidget = widget({ type = "textbox" })
+
+backuptimer = timer({ timeout = 1 })
+backuptimer:add_signal("timeout",
+	function()
+		result = io.popen("pgrep duplicity"):read("*n")
+		if result == nil then
+			backupwidget.text = ""
+		else
+			backupwidget.text = '<span color="red"> Backup running</span> | '
+		end
+	end)
+backuptimer:start()
+		
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -214,6 +230,7 @@ for s = 1, screen.count() do
         mytextclock,
 	volwidget,
 	mpdwidget,
+	backupwidget,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
