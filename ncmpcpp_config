@@ -467,13 +467,13 @@ colors_enabled = "yes"
 #
 #state_flags_color = "default"
 #
-main_window_color = "black"
+main_window_color = "blue"
 #
 #color1 = "white"
 #
 #color2 = "green"
 #
-main_window_highlight_color = "black"
+main_window_highlight_color = "cyan"
 #
 #progressbar_color = "default"
 #
