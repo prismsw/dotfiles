@@ -7,14 +7,21 @@ export GNOME_DESKTOP_SESSION_ID="01"
 # Merge Xresources for colour schemes
 xrdb -merge ~/.Xresources
 
+# Fix keyboard layout
+setxkbmap -layout de -variant nodeadkeys
+
 # Start pulseaudio
 start-pulseaudio-x11
 
-# Start mpd
-mpd
+# Restore volume levels
+alsactl -f ~/.asoundrc restore
+# Hack to get the PulseAudio volume down from max to the stored settings
+# One could also remove "flat-volumes=no" from /etc/pulse/daemon.conf, but it will cause weird interference with the VLC volume controls
+amixer set Master 1+
+amixer set Master 1-
 
-# Fix keyboard layout
-setxkbmap -layout de -variant nodeadkeys
+# Start mpd
+mpd &
 
 # Composite manager for transparency
 xcompmgr -fF -I 0.1 -O 0.1 &
