@@ -124,6 +124,16 @@ vicious.register(volwidget, vicious.widgets.volume,
 			return "Volume: " .. args[1] .. "%"
 		end
 	end, 0.1, "Master")
+-- Gmail widget
+gmailwidget = widget({ type = "textbox" })
+vicious.register(gmailwidget, vicious.widgets.gmail, 
+	function(widget, args)
+		if args["{count}"] > 0 then
+			return "<span color=\"red\">Gmail: " .. args["{count}"] .. "</span> | "
+		else
+			return "Gmail: " .. args["{count}"] .. " | "
+		end
+	end, 60)
 
 -- MPD widget
 mpdwidget = widget({type = "textbox" })
@@ -229,6 +239,7 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
 	volwidget,
+	gmailwidget,
 	mpdwidget,
 	backupwidget,
         s == 1 and mysystray or nil,
