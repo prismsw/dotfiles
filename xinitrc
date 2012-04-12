@@ -26,5 +26,8 @@ mpd &
 # Composite manager for transparency
 xcompmgr -fF -I 0.1 -O 0.1 &
 
+# Cursor theme fix
+xsetroot -cursor_name left_ptr &
+
 # Start awesome
 exec awesome
