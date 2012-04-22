@@ -23,6 +23,9 @@ amixer set Master 1-
 # Start mpd
 mpd &
 
+# Autostart irssi
+screen -dmS irssi irssi&
+
 # Composite manager for transparency
 xcompmgr -fF -I 0.1 -O 0.1 &
 
