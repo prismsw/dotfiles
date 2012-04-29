@@ -13,7 +13,7 @@ require("vicious")
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
-    naughty.notify({ preset = naughty.config.presets.critical,
+ naughty.notify({ preset = naughty.config.presets.critical,
                      title = "Oops, there were errors during startup!",
                      text = awesome.startup_errors })
 end
@@ -260,16 +260,16 @@ root.buttons(awful.util.table.join(
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
     -- Media buttons
-    awful.key({}, "XF86AudioMute", function() awful.util.spawn("amixer set Master toggle") end ),
-    awful.key({}, "XF86AudioRaiseVolume", function() awful.util.spawn("amixer set Master 2%+") end ),
-    awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("amixer set Master 2%-") end ),
+    awful.key({}, "XF86AudioMute", function() awful.util.spawn("amixer set Master toggle", false) end ),
+    awful.key({}, "XF86AudioRaiseVolume", function() awful.util.spawn("amixer set Master 2%+", false) end ),
+    awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("amixer set Master 2%-", false) end ),
     -- Needs to be adapted for the preferred music player
-    awful.key({}, "XF86AudioNext", function() awful.util.spawn("mpc next") end ),
-    awful.key({}, "XF86AudioPrev", function() awful.util.spawn("mpc prev") end ),
-    awful.key({}, "XF86AudioPlay", function() awful.util.spawn("mpc toggle") end ),
+    awful.key({}, "XF86AudioNext", function() awful.util.spawn("mpc next", false) end ),
+    awful.key({}, "XF86AudioPrev", function() awful.util.spawn("mpc prev", false) end ),
+    awful.key({}, "XF86AudioPlay", function() awful.util.spawn("mpc toggle", false) end ),
 
     -- Lock screen
-    awful.key({ "Mod1", "Control" }, "l", function() awful.util.spawn("slimlock") end),
+    awful.key({ "Mod1", "Control" }, "l", function() awful.util.spawn("slimlock", false) end),
 
 
     -- Window/Tag control
@@ -304,7 +304,7 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal, false) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -419,6 +419,10 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "chrome" },
       properties = { floating = false } },
+    { rule = { class = "Eclipse" },
+      properties = { tag = tags[2][4] } },
+    { rule = { class = "Transmission-gtk" },
+      properties = { tag = tags[1][6] } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
