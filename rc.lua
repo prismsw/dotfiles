@@ -36,7 +36,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/home/simon/.config/awesome/themes/blue/theme.lua")
+beautiful.init("/home/simon/.config/awesome/themes/dawn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -119,9 +119,9 @@ volwidget = widget({ type = "textbox" })
 vicious.register(volwidget, vicious.widgets.volume,
 	function(widget, args)
 		if args[1] == 0 or args[2] == "♩" then
-			return "Volume: " .. "off"
+			return "Volume: " .. "<span color=\"red\">OFF</span>" .. " | "
 		else
-			return "Volume: " .. args[1] .. "%"
+			return "Volume: " .. args[1] .. "%" .. " | "
 		end
 	end, 0.1, "Master")
 -- Gmail widget
@@ -149,7 +149,7 @@ vicious.register(mpdwidget, vicious.widgets.mpd,
 -- Backup widget
 backupwidget = widget({ type = "textbox" })
 
-backuptimer = timer({ timeout = 1 })
+backuptimer = timer({ timeout = 60 })
 backuptimer:add_signal("timeout",
 	function()
 		result = io.popen("pgrep duplicity"):read("*n")
@@ -411,8 +411,8 @@ awful.rules.rules = {
 		     size_hints_honor = false,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
+{ rule = { class = "MPlayer" },
+properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
     { rule = { class = "gimp" },
@@ -423,6 +423,9 @@ awful.rules.rules = {
       properties = { tag = tags[2][4] } },
     { rule = { class = "Transmission-gtk" },
       properties = { tag = tags[1][6] } },
+    { rule = { class = "Gimp" },
+      properties = { tag = tags[2][5] } },
+
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
