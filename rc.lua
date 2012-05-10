@@ -425,6 +425,8 @@ properties = { floating = true } },
       properties = { tag = tags[1][6] } },
     { rule = { class = "Gimp" },
       properties = { tag = tags[2][5] } },
+    { rule = { class = "Vlc" },
+      properties = { tag = tags[1][1] } },
 
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
