@@ -145,6 +145,19 @@ vicious.register(mpdwidget, vicious.widgets.mpd,
                 	return args["{Artist}"]..' - '.. args["{Title}"] .. " | "
         	end
     	end, 1)
+-- CPU widget
+cpuwidget =  widget({type = "textbox" })
+vicious.register(cpuwidget, vicious.widgets.cpu,
+	function(widget, args)
+		cpuStr = ""
+		if args[1] < 10 then
+			cpuStr = "0" .. args[1] .. "%"
+		else
+			cpuStr = args[1] .. "%"
+		end
+
+		return "CPU: " .. cpuStr .. " | "
+	end, 1)
 
 -- Backup widget
 backupwidget = widget({ type = "textbox" })
@@ -241,6 +254,7 @@ for s = 1, screen.count() do
 	volwidget,
 	gmailwidget,
 	mpdwidget,
+	cpuwidget,
 	backupwidget,
         s == 1 and mysystray or nil,
         mytasklist[s],
