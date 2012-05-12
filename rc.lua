@@ -9,6 +9,31 @@ require("naughty")
 -- Widget library
 require("vicious")
 
+-- {{{ Global functions
+
+-- Switches keyboard layout
+function switchkbLayout()
+	layout = getkbLayout()
+	if layout == "de" then
+		setkbLayout("us")
+	else
+		setkbLayout("de")
+	end
+end
+
+-- Sets keyboard layout
+function setkbLayout(layout)
+	io.popen("setxkbmap " .. layout)
+end
+
+-- Queries keyboard layout
+function getkbLayout()
+	layout = io.popen("setxkbmap -query | grep layout | awk '{print $2}'"):read()
+	return layout
+end
+
+-- }}}
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -110,9 +135,18 @@ mytextclock = awful.widget.textclock({ align = "right" })
 -- Create a systray
 mysystray = widget({ type = "systray" })
 
--- CPU Widget
--- cpuwidget = widget({ type = "textbox" })
--- vicious.register(cpuwidget, vicious.widgets.cpu, "$1% $2% $3% $4%")
+-- Keyboard layout widget
+kbwidget = widget({ type = "textbox" })
+
+kbtimer = timer({ timeout = 20 })
+kbtimer:add_signal("timeout",
+	function()
+		layout = getkbLayout() .. " | "
+		kbwidget.text = layout
+	end)
+kbtimer:start()
+kbtimer:emit_signal("timeout")
+
 
 -- Volume widget
 volwidget = widget({ type = "textbox" })
@@ -251,6 +285,7 @@ for s = 1, screen.count() do
         },
         mylayoutbox[s],
         mytextclock,
+	kbwidget,
 	volwidget,
 	gmailwidget,
 	mpdwidget,
@@ -284,6 +319,12 @@ globalkeys = awful.util.table.join(
 
     -- Lock screen
     awful.key({ "Mod1", "Control" }, "l", function() awful.util.spawn("slimlock", false) end),
+
+    -- Keyboard layout switcher
+    awful.key({ "Mod1", "Control" }, "k", function() 
+	    switchkbLayout()
+	    kbtimer:emit_signal("timeout") 
+    end),
 
 
     -- Window/Tag control
