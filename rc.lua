@@ -15,15 +15,16 @@ require("vicious")
 function switchkbLayout()
 	layout = getkbLayout()
 	if layout == "de" then
-		setkbLayout("us")
+		return setkbLayout("us")
 	else
-		setkbLayout("de")
+		return setkbLayout("de")
 	end
 end
 
 -- Sets keyboard layout
 function setkbLayout(layout)
 	io.popen("setxkbmap " .. layout)
+	return layout
 end
 
 -- Queries keyboard layout
@@ -322,8 +323,8 @@ globalkeys = awful.util.table.join(
 
     -- Keyboard layout switcher
     awful.key({ "Mod1", "Control" }, "k", function() 
-	    switchkbLayout()
-	    kbtimer:emit_signal("timeout") 
+	layout = switchkbLayout() .. " | "
+	kbwidget.text = layout
     end),
 
 
