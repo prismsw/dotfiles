@@ -5,6 +5,9 @@ alias pacman='pacman-color'
 
 alias sudo='nocorrect noglob do_sudo '
 
+# Protection against possible future stupidity
+alias rm='rm -i'
+
 # Fixed "sudo " and nocorrect
 function do_sudo
 {
