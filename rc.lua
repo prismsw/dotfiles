@@ -62,7 +62,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/home/simon/.config/awesome/themes/dawn/theme.lua")
+beautiful.init("/home/simon/.config/awesome/themes/slate/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -464,9 +464,9 @@ awful.rules.rules = {
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
                      focus = true,
-		     size_hints_honor = false,
                      keys = clientkeys,
-                     buttons = clientbuttons } },
+                     buttons = clientbuttons,
+	             size_hints_honor = false } },
 { rule = { class = "MPlayer" },
 properties = { floating = true } },
     { rule = { class = "pinentry" },
