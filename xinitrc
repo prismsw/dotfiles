@@ -7,9 +7,6 @@ export GNOME_DESKTOP_SESSION_ID="01"
 # Merge Xresources for colour schemes
 xrdb -merge ~/.Xresources
 
-# Fix keyboard layout
-setxkbmap -layout de -variant nodeadkeys
-
 # Start pulseaudio
 start-pulseaudio-x11
 
@@ -27,7 +24,7 @@ mpd &
 screen -dmS irssi irssi&
 
 # Composite manager for transparency
-xcompmgr -fF -I 0.1 -O 0.1 &
+compton -fF -I 0.1 -O 0.1 &
 
 # Cursor theme fix
 xsetroot -cursor_name left_ptr &
