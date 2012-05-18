@@ -255,6 +255,7 @@ mpd_music_dir = "/media/data/music"
 ##
 #
 #song_columns_list_format = "(7f)[green]{l} (25)[cyan]{a} (40)[]{t|f} (30)[red]{b}"
+song_columns_list_format = "(10)[blue]{l} (30)[green]{a} (30)[magenta]{b} (50)[yellow]{t}"
 #
 ##### various settings #####
 #
@@ -273,13 +274,13 @@ mpd_music_dir = "/media/data/music"
 #
 #playlist_separate_albums = "no"
 #
-#playlist_display_mode = "classic" (classic/columns)
+playlist_display_mode = "columns" (classic/columns)
 #
 #browser_display_mode = "classic" (classic/columns)
 #
 #search_engine_display_mode = "classic" (classic/columns)
 #
-#playlist_editor_display_mode = "classic" (classic/columns)
+playlist_editor_display_mode = "columns" (classic/columns)
 #
 #discard_colors_if_item_is_selected = "yes"
 #
@@ -459,23 +460,23 @@ colors_enabled = "yes"
 #
 #empty_tag_color = "cyan"
 #
-#header_window_color = "default"
+header_window_color = "cyan"
 #
-#volume_color = "default"
+volume_color = "red"
 #
 #state_line_color = "default"
 #
 #state_flags_color = "default"
 #
-main_window_color = "yellow"
+main_window_color = "white"
 #
-#color1 = "white"
+color1 = "cyan"
 #
-#color2 = "green"
+color2 = "cyan"
 #
-main_window_highlight_color = "white"
+#main_window_highlight_color = "white"
 #
-#progressbar_color = "default"
+progressbar_color = "cyan"
 #
 #statusbar_color = "default"
 #
@@ -487,5 +488,5 @@ active_column_color = "cyan"
 #
 #window_border_color = "green"
 #
-#active_window_border = "red"
+active_window_border = "blue"
 #
