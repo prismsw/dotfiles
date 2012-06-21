@@ -8,4 +8,4 @@ bind-key m toggle-show-read-feeds
 
 refresh-on-startup yes
 
-browser firefox
+browser firefox %u &
