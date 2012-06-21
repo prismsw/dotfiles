@@ -319,7 +319,7 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86AudioPlay", function() awful.util.spawn("mpc toggle", false) end ),
 
     -- Lock screen
-    awful.key({ "Mod1", "Control" }, "l", function() awful.util.spawn("slimlock", false) end),
+    awful.key({ "Mod1", "Control" }, "l", function() awful.util.spawn("slock", false) end),
 
     -- Keyboard layout switcher
     awful.key({ "Mod1", "Control" }, "k", function() 
@@ -461,13 +461,13 @@ awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
       properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = true,
-                     keys = clientkeys,
-                     buttons = clientbuttons,
-	             size_hints_honor = false } },
-{ rule = { class = "MPlayer" },
-properties = { floating = true } },
+		     border_color = beautiful.border_normal,
+		     focus = true,
+		     keys = clientkeys,
+		     buttons = clientbuttons,
+		     size_hints_honor = false } },
+    { rule = { class = "MPlayer" },
+      properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
     { rule = { class = "gimp" },
@@ -475,18 +475,20 @@ properties = { floating = true } },
     { rule = { class = "chrome" },
       properties = { floating = false } },
     { rule = { class = "Eclipse" },
-      properties = { tag = tags[2][4] } },
+      properties = { tag = tags[1][4] } },
     { rule = { class = "Transmission-gtk" },
-      properties = { tag = tags[1][6] } },
+      properties = { tag = tags[2][6] } },
     { rule = { class = "Gimp" },
-      properties = { tag = tags[2][5] } },
+      properties = { tag = tags[1][5] } },
     { rule = { class = "Vlc" },
-      properties = { tag = tags[1][1] } },
+      properties = { tag = tags[2][1] } },
 
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
 }
+
+
 -- }}}
 
 -- {{{ Signals
