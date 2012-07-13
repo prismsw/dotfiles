@@ -62,7 +62,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/home/simon/.config/awesome/themes/slate/theme.lua")
+beautiful.init("/home/simon/.config/awesome/themes/rainbow_stripes/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -130,19 +130,22 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- }}}
 
 -- {{{ Wibox
+widget_margin = 15
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
+mytextclock:margin({ right = widget_margin })
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
 
 -- Keyboard layout widget
 kbwidget = widget({ type = "textbox" })
+kbwidget:margin({ right = widget_margin })
 
 kbtimer = timer({ timeout = 20 })
 kbtimer:add_signal("timeout",
 	function()
-		layout = getkbLayout() .. " | "
+		layout = getkbLayout()
 		kbwidget.text = layout
 	end)
 kbtimer:start()
@@ -151,37 +154,42 @@ kbtimer:emit_signal("timeout")
 
 -- Volume widget
 volwidget = widget({ type = "textbox" })
+volwidget:margin({ right = widget_margin })
 vicious.register(volwidget, vicious.widgets.volume,
 	function(widget, args)
 		if args[1] == 0 or args[2] == "♩" then
-			return "Volume: " .. "<span color=\"red\">OFF</span>" .. " | "
+			return "Vol: " .. "<span color=\"red\">OFF</span>"
 		else
-			return "Volume: " .. args[1] .. "%" .. " | "
+			return "Vol: " .. args[1] .. "%"
 		end
 	end, 0.1, "Master")
+
 -- Gmail widget
 gmailwidget = widget({ type = "textbox" })
+gmailwidget:margin({ right = widget_margin })
 vicious.register(gmailwidget, vicious.widgets.gmail, 
 	function(widget, args)
 		if args["{count}"] > 0 then
-			return "<span color=\"red\">Gmail: " .. args["{count}"] .. "</span> | "
+			return "<span color=\"red\">Mail: " .. args["{count}"] .. "</span>"
 		else
-			return "Gmail: " .. args["{count}"] .. " | "
+			return "Mail: " .. args["{count}"]
 		end
 	end, 60)
 
 -- MPD widget
 mpdwidget = widget({type = "textbox" })
+mpdwidget:margin({ right = widget_margin })
 vicious.register(mpdwidget, vicious.widgets.mpd,
 	function (widget, args)
 		if args["{state}"] == "Stop" then 
-			return " - "
+                	return "N/A" ..' - '.. "N/A"
 		else 
-                	return args["{Artist}"]..' - '.. args["{Title}"] .. " | "
+                	return args["{Artist}"]..' - '.. args["{Title}"]
         	end
     	end, 1)
 -- CPU widget
 cpuwidget =  widget({type = "textbox" })
+cpuwidget:margin({ right = widget_margin })
 vicious.register(cpuwidget, vicious.widgets.cpu,
 	function(widget, args)
 		cpuStr = ""
@@ -191,11 +199,12 @@ vicious.register(cpuwidget, vicious.widgets.cpu,
 			cpuStr = args[1] .. "%"
 		end
 
-		return "CPU: " .. cpuStr .. " | "
+		return "CPU: " .. cpuStr
 	end, 1)
 
 -- Backup widget
 backupwidget = widget({ type = "textbox" })
+backupwidget:margin({ right = widget_margin })
 
 backuptimer = timer({ timeout = 60 })
 backuptimer:add_signal("timeout",
@@ -204,7 +213,7 @@ backuptimer:add_signal("timeout",
 		if result == nil then
 			backupwidget.text = ""
 		else
-			backupwidget.text = '<span color="red"> Backup running</span> | '
+			backupwidget.text = '<span color="red">Backup running</span>'
 		end
 	end)
 backuptimer:start()
