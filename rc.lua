@@ -7,7 +7,7 @@ require("beautiful")
 -- Notification library
 require("naughty")
 -- Widget library
-require("vicious")
+vicious = require("vicious")
 
 -- {{{ Global functions
 
