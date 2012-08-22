@@ -486,9 +486,11 @@ awful.rules.rules = {
     { rule = { class = "Eclipse" },
       properties = { tag = tags[1][4] } },
     { rule = { class = "Transmission-gtk" },
-      properties = { tag = tags[1][6] } },
+      properties = { tag = tags[2][6] } },
     { rule = { class = "Gimp" },
       properties = { tag = tags[1][5] } },
+    { rule = { class = "Vlc" },
+      properties = { tag = tags[2][1] } },
 
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
