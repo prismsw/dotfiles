@@ -34,6 +34,8 @@ function do_sudo
 
 export EDITOR="vim"
 export SHELL="/bin/zsh"
+PATH=$PATH:/home/simon/.gem/ruby/1.9.1/bin:/home/simon/.cabal/bin
+export PATH
 
 #{{{ ZSH Modules
 
