@@ -1,11 +1,11 @@
 -- Standard awesome library
-require("awful")
+awful = require("awful")
 require("awful.autofocus")
 require("awful.rules")
 -- Theme handling library
-require("beautiful")
+beautiful = require("beautiful")
 -- Notification library
-require("naughty")
+naughty = require("naughty")
 -- Widget library
 vicious = require("vicious")
 
@@ -35,31 +35,6 @@ end
 
 -- }}}
 
--- {{{ Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
-if awesome.startup_errors then
- naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
-                     text = awesome.startup_errors })
-end
-
--- Handle runtime errors after startup
-do
-    local in_error = false
-    awesome.add_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then return end
-        in_error = true
-
-        naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = err })
-        in_error = false
-    end)
-end
--- }}}
-
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/home/simon/.config/awesome/themes/rainbow_stripes/theme.lua")
@@ -74,7 +49,7 @@ editor_cmd = terminal .. " -e " .. editor
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
+modkey = "Mod1"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
@@ -483,14 +458,21 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "chrome" },
       properties = { floating = false } },
+    { rule = { class = "Chromium" },
+      properties = { floating = false } },
     { rule = { class = "Eclipse" },
       properties = { tag = tags[1][4] } },
     { rule = { class = "Transmission-gtk" },
+      properties = { tag = tags[2][6] } },
+    { rule = { class = "Transmission-remote-gtk" },
       properties = { tag = tags[2][6] } },
     { rule = { class = "Gimp" },
       properties = { tag = tags[1][5] } },
     { rule = { class = "Vlc" },
       properties = { tag = tags[2][1] } },
+    { rule = { class = "Spotify" },
+      properties = { tag = tags[2][3],
+                     floating = false } },
 
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
