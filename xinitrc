@@ -10,6 +10,9 @@ xrdb -merge ~/.Xresources
 # Start pulseaudio
 start-pulseaudio-x11
 
+# Keybindings
+xbindkeys
+
 # Restore volume levels
 alsactl -f ~/.asoundrc restore
 # Hack to get the PulseAudio volume down from max to the stored settings
@@ -29,5 +32,9 @@ compton -fF -I 0.1 -O 0.1 &
 # Cursor theme fix
 xsetroot -cursor_name left_ptr &
 
+# Needed to get xmobar from cabal to work
+PATH=$PATH:/home/simon/.cabal/bin
+
 # Start awesome
-exec awesome
+# exec awesome
+exec xmonad
