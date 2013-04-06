@@ -210,8 +210,7 @@ myLayout = tiled ||| Mirror tiled ||| Full
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    [ className =? "MPlayer"                    --> doFloat
-    , className =? "Gimp"                       --> doFloat
+    [ className =? "Gimp"                       --> doFloat
     , className =? "Eclipse"                    --> doShift "dev"
     , className =? "Transmission-remote-gtk"    --> doShift "down"
     , className =? "Vlc"                        --> doShift "media"
