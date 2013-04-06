@@ -10,6 +10,8 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.SetWMName
+import XMonad.Layout.NoBorders
 import Data.Monoid
 import System.Exit
 
@@ -46,7 +48,7 @@ myModMask       = mod1Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["main","term","media","dev","misc1","misc2"]
+myWorkspaces    = ["main","term","media","dev","misc","down","game"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -211,7 +213,7 @@ myManageHook = composeAll
     [ className =? "MPlayer"                    --> doFloat
     , className =? "Gimp"                       --> doFloat
     , className =? "Eclipse"                    --> doShift "dev"
-    , className =? "Transmission-remote-gtk"    --> doShift "misc2"
+    , className =? "Transmission-remote-gtk"    --> doShift "down"
     , className =? "Vlc"                        --> doShift "media"
     , className =? "Spotify"                    --> doShift "media"
     , resource  =? "desktop_window"             --> doIgnore
@@ -256,7 +258,7 @@ colorUrgent  = "#ff5555"
 myBar = "xmobar"
 myPP = xmobarPP { ppCurrent         = xmobarColor colorCurrent "" 
                 , ppVisible         = xmobarColor colorVisible ""
-                , ppHidden          = xmobarColor colorHidden ""
+                , ppHidden          = xmobarColor colorVisible ""
                 , ppHiddenNoWindows = xmobarColor colorHidden ""
                 , ppUrgent          = xmobarColor colorUrgent ""
                 , ppTitle           = xmobarColor colorCurrent ""
@@ -265,7 +267,8 @@ myPP = xmobarPP { ppCurrent         = xmobarColor colorCurrent ""
                 }
 toggleStrutsKey XConfig { XMonad.modMask = modMask } = (modMask, xK_b)
 myConfig = defaults
-        { layoutHook = avoidStruts $ layoutHook defaults
+        { startupHook = setWMName "LG3D"
+        , layoutHook = avoidStruts $ smartBorders $ layoutHook defaults
         , manageHook = manageHook defaults <+> manageDocks
         }
 
@@ -274,8 +277,7 @@ myConfig = defaults
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = do
-    xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
+main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
