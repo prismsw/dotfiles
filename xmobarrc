@@ -10,10 +10,8 @@ Config { font = "xft:DejaVu Sans Mono:pixelsize=11:antialias=true:hinting=true"
                     , Run Cpu ["-L","3","-H","50"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
     		        , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
-                    , Run MPD ["-t", "<artist> - <title>"] 10
-                    , Run Volume "default" "Master" [] 1
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% | %cpu% | %memory% }{ %mpd% | %default:Master% | %date%"
+       , template = "%StdinReader% | %cpu% | %memory% }{%date%"
        }
