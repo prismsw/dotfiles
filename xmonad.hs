@@ -214,9 +214,11 @@ myManageHook = composeAll
     , className =? "Eclipse"                    --> doShift "dev"
     , className =? "Transmission-remote-gtk"    --> doShift "down"
     , className =? "Vlc"                        --> doShift "media"
+    , className =? "Smplayer"                   --> doShift "media"
     , className =? "Spotify"                    --> doShift "media"
-    , resource  =? "desktop_window"             --> doIgnore
-    , resource  =? "kdesktop"                   --> doIgnore ]
+    , resource  =? "Steam"                      --> doShift "game"
+    , resource  =? "sun-awt-X11-XFramePeer"     --> doShift "dev"
+    , resource  =? "desktop_window"             --> doIgnore ]
 
 ------------------------------------------------------------------------
 -- Event handling
