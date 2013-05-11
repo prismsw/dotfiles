@@ -1,7 +1,6 @@
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 alias ls='ls --color=auto'
-alias pacman='pacman-color'
 
 alias sudo='nocorrect noglob do_sudo '
 
