@@ -218,6 +218,7 @@ myManageHook = composeAll
     , className =? "Spotify"                    --> doShift "media"
     , resource  =? "Steam"                      --> doShift "game"
     , resource  =? "sun-awt-X11-XFramePeer"     --> doShift "dev"
+    , resource  =? "hl2_linux"                  --> doShift "misc"
     , resource  =? "desktop_window"             --> doIgnore ]
 
 ------------------------------------------------------------------------
