@@ -38,7 +38,7 @@ compton -f -I 0.05 -O 0.05 -D 3 &
 xsetroot -cursor_name left_ptr &
 
 # Wallpaper
-nitrogen --set-auto /home/simon/Pictures/dual_wallpapers/earth_sun.jpg
+nitrogen --set-auto /home/simon/Pictures/wallpaper
 
 # Needed to get xmobar from cabal to work
 PATH=$PATH:/home/simon/.cabal/bin
