@@ -4,8 +4,6 @@ filetype plugin indent on
 syntax on
 syn on
 
-au BufEnter *.hs compiler ghc
-
 set number
 set encoding=utf8
 
