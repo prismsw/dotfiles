@@ -31,6 +31,7 @@ alsactl -f ~/.asoundrc restore
 
 # Start dropbox
 dropboxd &
+CopyAgent &
 
 # Start mpd
 #mpd &
