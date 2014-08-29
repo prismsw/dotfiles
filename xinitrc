@@ -16,32 +16,39 @@ if [ -s ~/.Xmodmap ]; then
     xmodmap ~/.Xmodmap
 fi
 
+# Disable touchpad when typing
+#
+syndaemon -t -k -i 2 -d &
+
 # Restore volume levels
 alsactl -f ~/.asoundrc restore
 # Hack to get the PulseAudio volume down from max to the stored settings
 # One could also remove "flat-volumes=no" from /etc/pulse/daemon.conf, but it will cause weird interference with the VLC volume controls
-amixer set Master 1+
-amixer set Master 1-
+#amixer set Master 1+
+#amixer set Master 1-
+
+# Start dropbox
+dropboxd &
 
 # Start mpd
-mpd &
+#mpd &
 
 CopyAgent &
 
 # Autostart irssi
-screen -dmS irssi irssi&
+#screen -dmS irssi irssi&
 
 # Composite manager for transparency
-compton -f -I 0.05 -O 0.05 -D 3 &
+#compton -f -I 0.05 -O 0.05 -D 3 &
 
 # Cursor theme fix
-xsetroot -cursor_name left_ptr &
+#xsetroot -cursor_name left_ptr &
 
 # Wallpaper
-nitrogen --set-auto /home/simon/Pictures/wallpaper
+#nitrogen --set-auto /home/simon/Pictures/wallpaper
 
 # Needed to get xmobar from cabal to work
-PATH=$PATH:/home/simon/.cabal/bin
+#PATH=$PATH:/home/simon/.cabal/bin
 
 # Start awesome
 # exec awesome
