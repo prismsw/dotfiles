@@ -1,5 +1,3 @@
-#ck-launch-session gnome-session
-
 # Fool xdg-open into thinking that we are in a DE
 export DE=gnome
 export GNOME_DESKTOP_SESSION_ID="01"
@@ -27,6 +25,8 @@ amixer set Master 1-
 
 # Start mpd
 mpd &
+
+CopyAgent &
 
 # Autostart irssi
 screen -dmS irssi irssi&
