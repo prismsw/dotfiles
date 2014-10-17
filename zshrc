@@ -1,6 +1,7 @@
 ZSH=/usr/share/oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export PATH="/home/simon/bin:$PATH"
 
 alias ls='ls --color=auto'
 
