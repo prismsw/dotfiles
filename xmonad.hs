@@ -8,11 +8,13 @@
 --
 
 import XMonad
+import XMonad.Actions.CopyWindow
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Reflect
+import XMonad.Layout.Grid
 import Data.Monoid
 import System.Exit
 
@@ -47,8 +49,6 @@ myModMask       = mod1Mask
 --
 -- A tagging example:
 --
--- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
---
 myWorkspaces    = ["main","term","media","dev","misc","down","game", "chat"]
 
 -- Border colors for unfocused and focused windows, respectively.
@@ -74,8 +74,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
 
-    -- close focused window
-    , ((modm .|. shiftMask, xK_c     ), kill)
+    -- close focused window (untag if there exists another, kill otherwise)
+    , ((modm .|. shiftMask, xK_c     ), kill1)
 
      -- Rotate through the available layout algorithms
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -155,6 +155,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
+    ++
+
+    -- mod-control-shift-[1..9] @@ Copy client to workspace N
+    [((m .|. modm, k), windows $ f i)
+        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask), (copy, shiftMask .|. controlMask)]]
+
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
@@ -171,7 +178,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList []
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = tiled ||| reflectHoriz tiled ||| Mirror tiled ||| Full
+myLayout = tiled ||| Grid ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
