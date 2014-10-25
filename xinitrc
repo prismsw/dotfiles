@@ -1,5 +1,3 @@
-#ck-launch-session gnome-session
-
 # Fool xdg-open into thinking that we are in a DE
 export DE=gnome
 export GNOME_DESKTOP_SESSION_ID="01"
@@ -29,12 +27,7 @@ alsactl -f ~/.asoundrc restore
 #amixer set Master 1+
 #amixer set Master 1-
 
-# Start dropbox
-dropboxd &
 CopyAgent &
-
-# Start mpd
-#mpd &
 
 # Autostart irssi
 #screen -dmS irssi irssi&

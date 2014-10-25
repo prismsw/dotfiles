@@ -12,6 +12,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Reflect
 import Data.Monoid
 import System.Exit
 
@@ -170,7 +171,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList []
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayout = tiled ||| reflectHoriz tiled ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio

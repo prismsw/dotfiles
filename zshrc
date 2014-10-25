@@ -11,6 +11,8 @@ alias sudo='nocorrect noglob do_sudo '
 alias mvn="color_maven"
 alias maven="/usr/bin/mvn"
 
+alias ino="nocorrect ino"
+
 # Colorize maven output
 color_maven() {
   local BOLD=`tput bold`
