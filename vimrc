@@ -16,7 +16,6 @@ set shiftround
 set nojoinspaces
 set autoindent
 
-let g:haddock_browser = "/usr/bin/firefox"
-let g:ghc = "/usr/bin/ghc"
+set clipboard=unnamedplus
 
 nmap <space> zz
