@@ -13,6 +13,11 @@ alias maven="/usr/bin/mvn"
 
 alias ino="nocorrect ino"
 
+# Base16 Shell
+BASE16_SCHEME="default"
+BASE16_SHELL="/usr/share/base16-shell/base16-$BASE16_SCHEME.dark.sh"
+[[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
+
 # Colorize maven output
 color_maven() {
   local BOLD=`tput bold`
@@ -110,9 +115,6 @@ setopt PUSHD_TO_HOME
 
 # this will ignore multiple directories for the stack.  Useful?  I dunno.
 setopt PUSHD_IGNORE_DUPS
-
-# 10 second wait if you do something that will delete everything.  I wish I'd had this before...
-setopt RM_STAR_WAIT
 
 # use magic (this is default, but it can't hurt!)
 setopt ZLE
