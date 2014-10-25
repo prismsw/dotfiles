@@ -61,8 +61,11 @@ myFocusedBorderColor = "#ffffff"
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
-    -- launch a terminal
-    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    -- launch a terminal, with the current path as working directory
+    [ ((modm .|. shiftMask, xK_Return), spawn $ ((XMonad.terminal conf) ++ " -cd $(xcwd)"))
+
+    -- launch a terminal in home
+    , ((modm .|. shiftMask, xK_BackSpace), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu-launch")
