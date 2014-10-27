@@ -2,7 +2,7 @@ Xcursor.theme: Vanilla-DMZ
 foreground: #000000
 
 ! URxvt settings
-URxvt.perl-ext-common: default,matcher,vtwheel
+URxvt.perl-ext-common: default,matcher,vtwheel,font-size
 URxvt.urlLauncher: firefox
 URxvt.matcher.button: 1
 URxvt.depth: 24
@@ -10,5 +10,8 @@ URxvt.background: #101010
 URxvt.scrollBar: off
 URxvt.transparent: false
 URxvt.internalBorder: 0
-<<<<<<< HEAD
 URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:antialias=true:hinting=true
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.keysym.C-Up: perl:font-size:increase
+URxvt.keysym.C-Down: perl:font-size:decrease
