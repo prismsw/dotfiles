@@ -25,7 +25,7 @@ defaults = defaultConfig {
     terminal            = "urxvt",
     normalBorderColor   = "#000000",
     focusedBorderColor  = "#ffffff",
-    workspaces          = ["main","term","media","dev","misc1", "misc2", "misc3" ,"down","game"],
+    workspaces          = ["main","term","media","dev1","dev2", "misc1", "misc2" ,"down","game"],
 
     keys                = myKeys,
     mouseBindings       = myMouseBindings,
@@ -36,8 +36,8 @@ defaults = defaultConfig {
 
 -- ### Window rules ###
 windowRules = composeAll
-    [ className =? "jetbrains-idea"             --> doShift "dev"
-    , className =? "rstudio-bin"                --> doShift "dev"
+    [ className =? "jetbrains-idea"             --> doShift "dev1"
+    , className =? "rstudio-bin"                --> doShift "dev2"
     , className =? "Transmission-remote-gtk"    --> doShift "down"
     , className =? "Vlc"                        --> doShift "media"
     , className =? "Smplayer"                   --> doShift "media"
