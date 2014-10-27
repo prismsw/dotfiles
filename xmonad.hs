@@ -1,11 +1,3 @@
---
--- xmonad example config file.
---
--- A template showing all available configuration hooks,
--- and how to override the defaults in your own xmonad.hs conf file.
---
--- Normally, you'd only override those defaults you care about.
---
 import XMonad
 import XMonad.Actions.CopyWindow
 import XMonad.Hooks.DynamicLog
@@ -28,6 +20,7 @@ defaults = defaultConfig {
     workspaces          = ["main","term","media","dev","misc1", "misc2", "misc3" ,"down","game"],
 
     keys                = myKeys,
+    mouseBindings       = myMouseBindings,
 
     layoutHook          = layouts,
     manageHook          = windowRules
@@ -52,6 +45,9 @@ layouts = tiled ||| Grid ||| Mirror tiled ||| Full
         nmaster =1
         ratio = 1/2
         delta = 3/100
+
+-- ### Mouse ###
+myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList []
 
 -- ### Keys ###
 --
