@@ -29,6 +29,7 @@ defaults = defaultConfig {
 
     keys                = myKeys,
     mouseBindings       = myMouseBindings,
+    focusFollowsMouse   = True,
 
     layoutHook          = layouts,
     manageHook          = windowRules
@@ -67,8 +68,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal in home
     , ((modm .|. shiftMask, xK_BackSpace), spawn $ XMonad.terminal conf)
 
-    -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu-launch")
+    -- launch yeganesh (dmenu wrapper)
+    , ((modm,               xK_p     ), spawn "yeganesh -x -- -fn \"xft:DejaVu Sans Mono:pixelsize=13:antialias=true:hinting=true\"")
 
     -- close focused window (untag if there exists another, kill otherwise)
     , ((modm .|. shiftMask, xK_c     ), kill1)
