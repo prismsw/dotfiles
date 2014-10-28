@@ -6,7 +6,7 @@ URxvt.perl-ext-common: default,matcher,vtwheel,font-size
 URxvt.urlLauncher: firefox
 URxvt.matcher.button: 1
 URxvt.depth: 24
-URxvt.background: #101010
+URxvt.background: #181818
 URxvt.scrollBar: off
 URxvt.transparent: false
 URxvt.internalBorder: 0
