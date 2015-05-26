@@ -23,5 +23,5 @@
     XF86AudioRaiseVolume
 
 "switch_kb_layout.sh"
-    m:0x0 + c:152
-    XF86Explorer
+    m:0x0 + c:179
+    XF86Tools
