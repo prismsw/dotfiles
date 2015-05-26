@@ -12,12 +12,13 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 -- ### Basic config ###
+myWS = ["main","term","media","dev","dev", "misc", "misc" ,"down","game"]
 
 defaults = defaultConfig {
     terminal            = "urxvt",
     normalBorderColor   = "#000000",
     focusedBorderColor  = "#ffffff",
-    workspaces          = ["main","term","media","dev1","dev2", "misc1", "misc2" ,"down","game"],
+    workspaces          = zipWith (++) (map (++":") (map show [1..])) myWS,
 
     keys                = myKeys,
     mouseBindings       = myMouseBindings,
@@ -125,7 +126,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
-
     ]
     ++
 
@@ -162,7 +162,7 @@ colorVisible = "#ffffff"
 colorHidden  = "#555555"
 colorUrgent  = "#ff5555"
 
-myBar = "xmobar"
+myBar = "xmobar -x 0"
 myPP = xmobarPP { ppCurrent         = xmobarColor colorCurrent "" 
                 , ppVisible         = xmobarColor colorVisible ""
                 , ppHidden          = xmobarColor colorVisible ""
