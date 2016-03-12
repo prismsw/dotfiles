@@ -1,11 +1,14 @@
+import Control.Exception
 import XMonad
 import XMonad.Actions.CopyWindow
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Reflect
 import XMonad.Layout.Grid
+import XMonad.Util.Run
 import System.Exit
 
 import qualified XMonad.StackSet as W
@@ -65,7 +68,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_BackSpace), spawn $ XMonad.terminal conf)
 
     -- launch yeganesh (dmenu wrapper)
-    , ((modm,               xK_p     ), spawn "$(yeganesh -x -- -fn \"xft:DejaVu Sans Mono:pixelsize=13:antialias=true:hinting=true\")")
+    , ((modm,               xK_p     ), spawn "$(yeganesh -x -- -fn \"xft:DejaVu Sans Mono:pixelsize=14:antialias=true:hinting=true\")")
 
     -- close focused window (untag if there exists another, kill otherwise)
     , ((modm .|. shiftMask, xK_c     ), kill1)
@@ -174,12 +177,18 @@ myPP = xmobarPP { ppCurrent         = xmobarColor colorCurrent ""
                 }
 toggleStrutsKey XConfig { XMonad.modMask = modMask } = (modMask, xK_b)
 
+startup :: X ()
+startup = do
+    setWMName "LG3D"
+
 conf = defaults {
-    startupHook = setWMName "LG3D",
+    startupHook = startup,
     layoutHook = avoidStruts $ smartBorders $ layoutHook defaults,
     manageHook = manageHook defaults <+> manageDocks
 }
 
 
 -- ### Start xmonad ###
-main = xmonad =<< statusBar myBar myPP toggleStrutsKey conf
+main = do
+    barConf <- statusBar myBar myPP toggleStrutsKey (ewmh conf)
+    xmonad barConf

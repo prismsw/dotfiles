@@ -25,3 +25,9 @@
 "switch_kb_layout.sh"
     m:0x0 + c:179
     XF86Tools
+
+"xdotool click 3"
+    End
+
+"xdotool click 1"
+    Super_L

@@ -4,6 +4,7 @@ filetype plugin indent on
 syntax on
 syn on
 
+
 call pathogen#infect()
 highlight Pmenu ctermfg=black ctermbg=blue
 
@@ -27,3 +28,4 @@ nmap <space> zz
 map <C-n> :NERDTreeToggle<CR>
 
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
+autocmd! BufNewFile,BufRead *.dl set filetype=prolog
