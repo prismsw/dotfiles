@@ -1,31 +1,27 @@
---
--- xmonad example config file.
---
--- A template showing all available configuration hooks,
--- and how to override the defaults in your own xmonad.hs conf file.
---
--- Normally, you'd only override those defaults you care about.
---
+import Control.Exception
 import XMonad
 import XMonad.Actions.CopyWindow
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Reflect
 import XMonad.Layout.Grid
+import XMonad.Util.Run
 import System.Exit
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 -- ### Basic config ###
+myWS = ["main","term","media","dev","dev", "misc", "misc" ,"down","game"]
 
 defaults = defaultConfig {
     terminal            = "urxvt",
     normalBorderColor   = "#000000",
     focusedBorderColor  = "#ffffff",
-    workspaces          = ["main","term","media","dev1","dev2", "misc1", "misc2" ,"down","game"],
+    workspaces          = zipWith (++) (map (++":") (map show [1..])) myWS,
 
     keys                = myKeys,
     mouseBindings       = myMouseBindings,
@@ -55,6 +51,9 @@ layouts = tiled ||| Grid ||| Mirror tiled ||| Full
         ratio = 1/2
         delta = 3/100
 
+-- ### Mouse ###
+myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList []
+
 -- ### Keys ###
 --
 ------------------------------------------------------------------------
@@ -69,7 +68,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_BackSpace), spawn $ XMonad.terminal conf)
 
     -- launch yeganesh (dmenu wrapper)
-    , ((modm,               xK_p     ), spawn "$(yeganesh -x -- -fn \"xft:DejaVu Sans Mono:pixelsize=13:antialias=true:hinting=true\")")
+    , ((modm,               xK_p     ), spawn "$(yeganesh -x -- -fn \"xft:DejaVu Sans Mono:pixelsize=14:antialias=true:hinting=true\")")
 
     -- close focused window (untag if there exists another, kill otherwise)
     , ((modm .|. shiftMask, xK_c     ), kill1)
@@ -130,7 +129,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
-
     ]
     ++
 
@@ -159,25 +157,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask), (copy, shiftMask .|. controlMask)]]
 
-------------------------------------------------------------------------
--- Mouse bindings: default actions bound to mouse events
---
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
-
-    -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
-
-    -- mod-button2, Raise the window to the top of the stack
-    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
-
-    -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
-
-    -- you may also bind events to the mouse scroll wheel (button4 and button5)
-    ]
-
 -- ### Xmobar ###
 
 -- Colors
@@ -186,7 +165,7 @@ colorVisible = "#ffffff"
 colorHidden  = "#555555"
 colorUrgent  = "#ff5555"
 
-myBar = "xmobar"
+myBar = "xmobar -x 1"
 myPP = xmobarPP { ppCurrent         = xmobarColor colorCurrent "" 
                 , ppVisible         = xmobarColor colorVisible ""
                 , ppHidden          = xmobarColor colorVisible ""
@@ -198,12 +177,18 @@ myPP = xmobarPP { ppCurrent         = xmobarColor colorCurrent ""
                 }
 toggleStrutsKey XConfig { XMonad.modMask = modMask } = (modMask, xK_b)
 
+startup :: X ()
+startup = do
+    setWMName "LG3D"
+
 conf = defaults {
-    startupHook = setWMName "LG3D",
+    startupHook = startup,
     layoutHook = avoidStruts $ smartBorders $ layoutHook defaults,
     manageHook = manageHook defaults <+> manageDocks
 }
 
 
 -- ### Start xmonad ###
-main = xmonad =<< statusBar myBar myPP toggleStrutsKey conf
+main = do
+    barConf <- statusBar myBar myPP toggleStrutsKey (ewmh conf)
+    xmonad barConf

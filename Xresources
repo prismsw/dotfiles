@@ -10,7 +10,7 @@ URxvt.background: #181818
 URxvt.scrollBar: off
 URxvt.transparent: false
 URxvt.internalBorder: 0
-URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:antialias=true:hinting=true
+URxvt.font: xft:DejaVu Sans Mono for Powerline:pixelsize=12:antialias=true:hinting=true
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 URxvt.keysym.C-Up: perl:font-size:increase

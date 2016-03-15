@@ -1,3 +1,4 @@
+-- vim: syntax=haskell
 Config { font = "xft:DejaVu Sans Mono:pixelsize=11:antialias=true:hinting=true"
        , borderColor = "black"
        , border = TopB
@@ -7,11 +8,13 @@ Config { font = "xft:DejaVu Sans Mono:pixelsize=11:antialias=true:hinting=true"
        , lowerOnStart = False
        , hideOnStart = False
        , commands = [ Run StdinReader
-                    , Run Cpu ["-L","3","-H","50"] 10
-                    , Run Memory ["-t","Mem: <usedratio>%"] 10
-    		        , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run Cpu ["-L","3","-H","80", "--high", "red", "-p", "3"] 30
+                    , Run Memory ["-t","Mem: <usedratio>%", "-H", "85", "--high", "red", "-p", "3"] 30
+                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run Volume "default" "Master" ["-t", "<volume>% <status>"] 1
+                    , Run Network "eth0" ["-t", "<dev>: <rx>|<tx>", "-m", "3", "-S", "true"] 10
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% | %cpu% | %memory% }{%date%"
+       , template = "%StdinReader% | %cpu% | %memory% | %eth0% }{ %default:Master% | %date%"
        }
