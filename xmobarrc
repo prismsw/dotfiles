@@ -12,7 +12,7 @@ Config { font = "xft:DejaVu Sans Mono:pixelsize=11:antialias=true:hinting=true"
                     , Run Memory ["-t","Mem: <usedratio>%", "-H", "85", "--high", "red", "-p", "3"] 30
                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
                     , Run Volume "default" "Master" ["-t", "<volume>% <status>"] 1
-                    , Run Network "eth0" ["-t", "<dev>: <rx>|<tx>", "-m", "3", "-S", "true"] 10
+                    , Run Network "eth0" ["-t", "<dev>: <rx> kB", "-m", "3"] 100
                     ]
        , sepChar = "%"
        , alignSep = "}{"
