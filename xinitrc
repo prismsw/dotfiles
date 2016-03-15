@@ -26,8 +26,6 @@ amixer set Master 1-
 # Start mpd
 mpd &
 
-CopyAgent &
-
 # Autostart irssi
 screen -dmS irssi irssi&
 
