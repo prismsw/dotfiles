@@ -17,7 +17,7 @@ import qualified Data.Map        as M
 -- ### Basic config ###
 myWS = ["main","term","media","dev","dev", "misc", "misc" ,"down","game"]
 
-defaults = defaultConfig {
+defaults = def {
     terminal            = "urxvt",
     normalBorderColor   = "#000000",
     focusedBorderColor  = "#ffffff",
@@ -135,11 +135,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
-    --
+    -- mod-control-[1..9], Move client to workspace N and switch to workspace N
+    -- mod-control-shift-[1..9] @@ Copy client to workspace N
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)
-            , (\i -> W.greedyView i . W.shift i, controlMask)]]
+        , (f, m) <- [ (W.greedyView, 0), (W.shift, shiftMask)
+                    , (\i -> W.greedyView i . W.shift i, controlMask)
+                    , (copy, shiftMask .|. controlMask)
+            ]
+    ]
     ++
 
     --
@@ -148,14 +152,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-
-    ++
-
-    -- mod-control-shift-[1..9] @@ Copy client to workspace N
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask), (copy, shiftMask .|. controlMask)]]
+        , (f, m) <- [ (W.view, 0)
+                    , (W.shift, shiftMask)
+                    ]
+    ]
 
 -- ### Xmobar ###
 
