@@ -17,3 +17,4 @@ zstyle ':prezto:load' pmodule \
   'prompt'
 
 zstyle ':prezto:module:prompt' theme 'paradox'
+zstyle ':prezto:module:editor' key-bindings 'emacs'
