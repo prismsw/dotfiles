@@ -1,6 +1,7 @@
 source /etc/zsh/zpreztorc
 source /usr/lib/prezto/init.zsh
 source /usr/lib/prezto/runcoms/zshrc
+source /etc/profile.d/fzf.zsh
 
 PATH="/home/simon/bin:$PATH"
 PATH=$PATH:/home/simon/.gem/ruby/1.9.1/bin:/home/simon/.cabal/bin
