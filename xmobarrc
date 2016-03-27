@@ -13,11 +13,12 @@ Config { font = "xft:DejaVu Sans Mono:pixelsize=13:antialias=true:hinting=true"
   		    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
                     , Run Wireless "wlp3s0" ["-L","40","-H","80","--low","red","--high","green", "-p", "3"] 30
                     , Run BatteryP ["BAT0", "BAT1"] [ "-t", "<left>% - <timeleft> <acstatus>", "-L", "10", "-H", "50", "-p", "3", "--", "-O", "- <fc=green>Charging</fc>", "-o", "", "-i", "", "-l", "red", "-h", "green"] 100
-                    , Run Volume "default" "Master" ["-t", "<volume>% <status>"] 10
+                    , Run Volume "default" "Master" ["-t", "<volume>% <status>"] 1
                     , Run Network "wlp3s0" ["-t", "<rx> kB", "-m", "3"] 100
-                    , Run Com "/home/simon/dotfiles/bin/wifi_killed.sh" [] "wkilled" 100
+                    , Run Com "/home/simon/dotfiles/bin/wifi_killed.sh" [] "wkilled" 30
+                    , Run Com "/home/simon/dotfiles/bin/query_kb_layout.sh" [] "kblayout" 5
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% | %cpu% | %memory% | %wlp3s0wi% - %wlp3s0% <fc=red>%wkilled%</fc> }{ %battery% | %default:Master% | %date%"
+       , template = "%StdinReader% | %cpu% | %memory% | %wlp3s0wi% - %wlp3s0% <fc=red>%wkilled%</fc> }{ %battery% | %default:Master% | %kblayout% | %date%"
        }
