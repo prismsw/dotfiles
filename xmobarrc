@@ -17,8 +17,9 @@ Config { font = "xft:DejaVu Sans Mono:pixelsize=13:antialias=true:hinting=true"
                     , Run Network "wlp3s0" ["-t", "<rx> kB", "-m", "3"] 100
                     , Run Com "/home/simon/dotfiles/bin/wifi_killed.sh" [] "wkilled" 30
                     , Run Com "/home/simon/dotfiles/bin/query_kb_layout.sh" [] "kblayout" 5
+                    , Run Com "/home/simon/dotfiles/bin/query_brightness.sh" [] "brightness" 1
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% | %cpu% | %memory% | %wlp3s0wi% - %wlp3s0% <fc=red>%wkilled%</fc> }{ %battery% | %default:Master% | %kblayout% | %date%"
+       , template = "%StdinReader% | %cpu% | %memory% | %wlp3s0wi% - %wlp3s0% <fc=red>%wkilled%</fc> }{⚡ %battery% | ♪ %default:Master% | ◐ %brightness% | %kblayout% | %date%"
        }
