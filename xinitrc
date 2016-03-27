@@ -1,3 +1,5 @@
+xcalib ~/dotfiles/LP140WF1_SPK1.icm
+
 # Fool xdg-open into thinking that we are in a DE
 export DE=gnome
 export GNOME_DESKTOP_SESSION_ID="01"
@@ -10,6 +12,9 @@ start-pulseaudio-x11
 
 # Keybindings
 xbindkeys
+
+# Keyboard controlled cursor
+keynav &
 
 # Key remapping
 if [ -s ~/.Xmodmap ]; then
@@ -27,8 +32,6 @@ alsactl -f ~/.asoundrc restore
 #amixer set Master 1+
 #amixer set Master 1-
 
-CopyAgent &
-
 # Autostart irssi
 #screen -dmS irssi irssi&
 
@@ -43,6 +46,15 @@ CopyAgent &
 
 # Needed to get xmobar from cabal to work
 #PATH=$PATH:/home/simon/.cabal/bin
+
+export _JAVA_AWT_WM_NONREPARENTING=1
+wmname LG3D
+
+# Notifications
+dunst &
+
+# Battery monitoring
+batterymon -i 1 -e "/usr/bin/systemctl suspend" -c "3" -n "5" &
 
 # Start awesome
 # exec awesome
