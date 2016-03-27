@@ -3,8 +3,7 @@ source /usr/lib/prezto/init.zsh
 source /usr/lib/prezto/runcoms/zshrc
 source /etc/profile.d/fzf.zsh
 
-PATH="/home/simon/bin:$PATH"
-PATH=$PATH:/home/simon/.gem/ruby/1.9.1/bin:/home/simon/.cabal/bin
+PATH="/home/simon/dotfiles/bin:$PATH"
 export PATH
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export EDITOR="vim"
@@ -12,8 +11,6 @@ export SHELL="/bin/zsh"
 
 alias mvn="color_maven"
 alias maven="/usr/bin/mvn"
-
-alias ino="nocorrect ino"
 
 # Base16 Shell
 BASE16_SCHEME="default"
