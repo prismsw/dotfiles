@@ -3,7 +3,7 @@ source /usr/lib/prezto/init.zsh
 source /usr/lib/prezto/runcoms/zshrc
 source /etc/profile.d/fzf.zsh
 
-PATH="/home/simon/dotfiles/bin:$PATH"
+PATH="$PATH:/home/simon/dotfiles/bin"
 export PATH
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export EDITOR="vim"
