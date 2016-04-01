@@ -23,3 +23,4 @@ set clipboard=unnamedplus
 nmap <space> zz
 
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
+autocmd FileType haskell setlocal shiftwidth=2 tabstop=2
