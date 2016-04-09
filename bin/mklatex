@@ -1,0 +1,64 @@
+#!/bin/bash
+
+############################
+# CONFIG: Change these as necessary
+############################
+# pandoc
+PANDOC_CMD="pandoc"
+PANDOC_OPTS="-s --latex-engine=xelatex --number-sections -V geometry:margin=1in"
+
+# latexmk
+LATEXMK_CMD="latexmk"
+LATEXMK_OPTS="-xelatex -pvc"
+
+SLEEP_TIME=3    # in seconds
+
+############################
+
+path=$1
+
+# must have a filename
+if [ -z "$path" ]
+then
+  echo "Must provide a path to file"
+  exit 1
+fi
+
+# check to make sure this is a markdown file
+name=$( basename $path )
+ext=${name##*.}
+if [ "$ext" != "md" ]
+then
+  echo "File must be a markdown file (with extension .md)"
+  exit 1
+fi
+
+# time to sleep in between checks
+
+# command to run
+basename=${name%.*}
+tex="${basename}.tex"
+cmd="${PANDOC_CMD} ${PANDOC_OPTS} -o ${tex} ${path}"
+
+echo "Listening for changes to ${path}"
+echo "Will run this command on change:"
+echo "    ${cmd}"
+echo "(Ctrl-C to exit)"
+echo
+
+sleep 1
+
+while true
+do
+   ATIME=`stat -c "%Z" ${path}`
+
+   if [[ "$ATIME" != "$LTIME" ]]
+   then
+       eval $cmd
+       LTIME=$ATIME
+   fi
+   sleep "$SLEEP_TIME"
+done &
+
+
+eval "${LATEXMK_CMD} ${LATEXMK_OPTS} ${basename}"
