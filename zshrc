@@ -11,6 +11,7 @@ export SHELL="/bin/zsh"
 
 alias mvn="color_maven"
 alias maven="/usr/bin/mvn"
+alias rm="rm -I"
 
 # Base16 Shell
 BASE16_SCHEME="default"
