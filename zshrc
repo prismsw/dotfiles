@@ -12,6 +12,7 @@ export SHELL="/bin/zsh"
 
 alias mvn="color_maven"
 alias maven="/usr/bin/mvn"
+alias rm="rm -I"
 
 alias ino="nocorrect ino"
 
