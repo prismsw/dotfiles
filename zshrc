@@ -1,7 +1,7 @@
 source /etc/zsh/zpreztorc
 source /usr/lib/prezto/init.zsh
 source /usr/lib/prezto/runcoms/zshrc
-source /etc/profile.d/fzf.zsh
+source /usr/share/zsh/site-functions/_fzf
 
 PATH="$PATH:/home/simon/dotfiles/bin"
 export PATH
