@@ -15,13 +15,14 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 -- ### Basic config ###
-myWS = ["main","term","media","dev","dev", "misc", "misc" ,"down","game"]
+myWS = ["web","term","media","dev","dev","dev","misc","misc","misc","mail"]
+wsNumbers = [1..9] ++ [0]
 
 defaults = def {
     terminal            = "urxvt",
     normalBorderColor   = "#000000",
     focusedBorderColor  = "#ffffff",
-    workspaces          = zipWith (++) (map (++":") (map show [1..])) myWS,
+    workspaces          = zipWith (++) (map (++":") (map show wsNumbers)) myWS,
 
     keys                = myKeys,
     mouseBindings       = myMouseBindings,
@@ -32,15 +33,7 @@ defaults = def {
 }
 
 -- ### Window rules ###
-windowRules = composeAll
-    [ className =? "jetbrains-idea"             --> doShift "dev1"
-    , className =? "rstudio-bin"                --> doShift "dev2"
-    , className =? "Transmission-remote-gtk"    --> doShift "down"
-    , className =? "Vlc"                        --> doShift "media"
-    , className =? "Smplayer"                   --> doShift "media"
-    , resource  =? "Steam"                      --> doShift "game"
-    , resource  =? "hl2_linux"                  --> doShift "misc1"
-    , resource  =? "desktop_window"             --> doIgnore ]
+windowRules = composeAll []
 
 -- ### Layouts ###
 
@@ -138,7 +131,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-control-[1..9], Move client to workspace N and switch to workspace N
     -- mod-control-shift-[1..9] @@ Copy client to workspace N
     [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+        | (i, k) <- zip (XMonad.workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])
         , (f, m) <- [ (W.greedyView, 0), (W.shift, shiftMask)
                     , (\i -> W.greedyView i . W.shift i, controlMask)
                     , (copy, shiftMask .|. controlMask)
