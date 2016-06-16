@@ -20,6 +20,10 @@ BASE16_SCHEME="default"
 BASE16_SHELL="/usr/share/base16-shell/base16-$BASE16_SCHEME.dark.sh"
 [[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
 
+# Fix cursor highlighting
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[cursor]=underline
+
 # Colorize maven output
 color_maven() {
   local BOLD=`tput bold`
