@@ -6,7 +6,7 @@ source /usr/share/zsh/site-functions/_fzf
 PATH="$PATH:/home/simon/dotfiles/bin"
 export PATH
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-export EDITOR="vim"
+export EDITOR="nvim"
 export SHELL="/bin/zsh"
 
 alias mvn="color_maven"

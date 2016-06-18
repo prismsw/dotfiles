@@ -5,7 +5,6 @@ syntax on
 syn on
 
 
-call pathogen#infect()
 highlight Pmenu ctermfg=black ctermbg=blue
 
 set wildchar=<Tab> wildmenu wildmode=full
