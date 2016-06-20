@@ -13,6 +13,7 @@ call plug#begin('~/.config/nvim/plugged/')
     Plug 'neomake/neomake'
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
+    Plug 'racer-rust/vim-racer'
 call plug#end()
 
 colorscheme default
@@ -72,7 +73,12 @@ highlight clear SignColumn
 " Airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#show_buffers = 1
 let g:airline_skip_empty_sections = 1
 let g:neomake_airline = 1
+
+" Racer
+set hidden
+let g:racer_cmd = "/usr/bin/racer"
+let $RUST_SRC_PATH="/usr/src/rust/rust"
