@@ -40,7 +40,7 @@ windowRules = composeAll []
 layouts = tiled ||| Grid ||| Mirror tiled ||| Full
     where
         tiled = Tall nmaster delta ratio
-        nmaster =1
+        nmaster = 1
         ratio = 1/2
         delta = 3/100
 
