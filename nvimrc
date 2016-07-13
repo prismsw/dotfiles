@@ -37,6 +37,8 @@ set nojoinspaces
 set autoindent
 
 set hlsearch
+set ignorecase
+set smartcase
 
 set clipboard=unnamedplus
 
