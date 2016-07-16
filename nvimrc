@@ -14,6 +14,7 @@ call plug#begin('~/.config/nvim/plugged/')
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'racer-rust/vim-racer'
+    Plug 'haya14busa/incsearch.vim'
 call plug#end()
 
 colorscheme default
@@ -37,15 +38,21 @@ set nojoinspaces
 set autoindent
 
 set hlsearch
+hi Search cterm=NONE ctermfg=black ctermbg=blue
 set ignorecase
 set smartcase
 
 set clipboard=unnamedplus
 
+" Center on cursor
 nmap <space> zz
 map <C-n> :NERDTreeToggle<CR>
+" Fzf search
 map <C-p> :Files<CR>
+" Move to next buffer
 map <C-l> :bn<CR>
+" Unhighlight search on esc
+nnoremap <esc> :noh<return><esc>
 
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.dl set filetype=prolog
@@ -84,3 +91,8 @@ let g:neomake_airline = 1
 set hidden
 let g:racer_cmd = "/usr/bin/racer"
 let $RUST_SRC_PATH="/usr/src/rust/rust"
+
+" Incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
