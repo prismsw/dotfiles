@@ -159,7 +159,7 @@ colorHidden  = "#555555"
 colorUrgent  = "#ff5555"
 
 myBar = "xmobar -x 0"
-myPP = xmobarPP { ppCurrent         = xmobarColor colorCurrent "" 
+myPP = xmobarPP { ppCurrent         = xmobarColor colorCurrent ""
                 , ppVisible         = xmobarColor colorVisible ""
                 , ppHidden          = xmobarColor colorVisible ""
                 , ppHiddenNoWindows = xmobarColor colorHidden ""
