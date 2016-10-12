@@ -23,7 +23,7 @@ fi
 
 # Disable touchpad when typing
 #
-syndaemon -t -k -i 2 -d &
+#syndaemon -t -k -i 2 -d &
 
 # Restore volume levels
 alsactl -f ~/.asoundrc restore
@@ -54,7 +54,7 @@ wmname LG3D
 dunst &
 
 # Battery monitoring
-batterymon -i 1 -e "/usr/bin/systemctl suspend" -c "3" -n "5" &
+batterymon -i 1 -e "/usr/bin/systemctl hibernate || /usr/bin/systemctl suspend" -c "3" -n "5" &
 
 # Start awesome
 # exec awesome
