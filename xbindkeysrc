@@ -31,3 +31,7 @@
 
 "xdotool click 1"
     Super_L
+
+"screengrab --region"
+    m:0x4 + c:107
+    Control + Print

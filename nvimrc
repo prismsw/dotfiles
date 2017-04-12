@@ -15,6 +15,7 @@ call plug#begin('~/.config/nvim/plugged/')
     Plug 'junegunn/fzf.vim'
     Plug 'racer-rust/vim-racer'
     Plug 'haya14busa/incsearch.vim'
+    Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 colorscheme default

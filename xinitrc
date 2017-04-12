@@ -54,7 +54,10 @@ wmname LG3D
 dunst &
 
 # Battery monitoring
-batterymon -i 1 -e "/usr/bin/systemctl hibernate || /usr/bin/systemctl suspend" -c "3" -n "5" &
+batterymon -i 10 -e "/usr/bin/systemctl hibernate || /usr/bin/systemctl suspend" -c "3" -n "5" &
+
+# Fix QT upscaling everything
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
 
 # Start awesome
 # exec awesome

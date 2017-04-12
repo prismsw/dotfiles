@@ -1,3 +1,3 @@
 #!/usr/bin/zsh
 
-xbacklight | awk '{print int($1)"%"}'
+xbacklight -get | awk '{print int($1)"%"}'
