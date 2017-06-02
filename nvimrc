@@ -55,6 +55,13 @@ map <C-l> :bn<CR>
 " Unhighlight search on esc
 nnoremap <esc> :noh<return><esc>
 
+" Fixes for accidental shift
+nnoremap ; :
+command Q q
+command W w
+command WQ wq
+command Wq wq
+
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.dl set filetype=prolog
 
