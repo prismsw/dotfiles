@@ -10,7 +10,7 @@ call plug#begin('~/.config/nvim/plugged/')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'jamessan/vim-gnupg'
-    Plug 'neomake/neomake'
+    " Plug 'neomake/neomake'
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'racer-rust/vim-racer'
@@ -65,26 +65,26 @@ command Wq wq
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.dl set filetype=prolog
 
-" Neomake
-autocmd! BufWritePost * Neomake
-hi ErrorMsg ctermbg=0 ctermfg=1
-let g:neomake_error_sign = {
-            \ 'text': '✖',
-            \ 'texthl': 'ErrorMsg',
-            \ }
-hi WarningMsg ctermbg=0 ctermfg=3
-let g:neomake_warning_sign = {
-            \ 'text': '➤',
-            \ 'texthl': 'WarningMsg',
-            \ }
-
-" Does nothing, why?
-hi InfoMsg ctermbg=4 ctermfg=0
-let g:neomake_info_sign = {
-            \ 'text': 'ℹ',
-            \ 'texthl': 'InfoMsg',
-            \ }
-highlight clear SignColumn
+" " Neomake
+" autocmd! BufWritePost * Neomake
+" hi ErrorMsg ctermbg=0 ctermfg=1
+" let g:neomake_error_sign = {
+"             \ 'text': '✖',
+"             \ 'texthl': 'ErrorMsg',
+"             \ }
+" hi WarningMsg ctermbg=0 ctermfg=3
+" let g:neomake_warning_sign = {
+"             \ 'text': '➤',
+"             \ 'texthl': 'WarningMsg',
+"             \ }
+"
+" " Does nothing, why?
+" hi InfoMsg ctermbg=4 ctermfg=0
+" let g:neomake_info_sign = {
+"             \ 'text': 'ℹ',
+"             \ 'texthl': 'InfoMsg',
+"             \ }
+" highlight clear SignColumn
 
 
 " Airline
@@ -93,7 +93,7 @@ let g:airline_theme='bubblegum'
 "let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#show_buffers = 1
 let g:airline_skip_empty_sections = 1
-let g:neomake_airline = 1
+"let g:neomake_airline = 1
 
 " Racer
 set hidden
