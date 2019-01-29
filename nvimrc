@@ -18,7 +18,7 @@ call plug#begin('~/.config/nvim/plugged/')
     Plug 'leafgarland/typescript-vim'
 call plug#end()
 
-colorscheme delek
+colorscheme peachpuff
 
 filetype plugin indent on
 syntax on
