@@ -1,0 +1,201 @@
+# ################################################################ #
+# THE FOLLOWING IS AN EXPLANATION OF THE GRAMMAR THAT SKHD PARSES. #
+# FOR SIMPLE EXAMPLE MAPPINGS LOOK FURTHER DOWN THIS FILE..        #
+# ################################################################ #
+
+# A list of all built-in modifier and literal keywords can
+# be found at https://github.com/koekeishiya/skhd/issues/1
+#
+# A hotkey is written according to the following rules:
+#
+#   hotkey       = <mode> '<' <action> | <action>
+#
+#   mode         = 'name of mode' | <mode> ',' <mode>
+#
+#   action       = <keysym> '[' <proc_map_lst> ']' | <keysym> '->' '[' <proc_map_lst> ']'
+#                  <keysym> ':' <command>          | <keysym> '->' ':' <command>
+#                  <keysym> ';' <mode>             | <keysym> '->' ';' <mode>
+#
+#   keysym       = <mod> '-' <key> | <key>
+#
+#   mod          = 'modifier keyword' | <mod> '+' <mod>
+#
+#   key          = <literal> | <keycode>
+#
+#   literal      = 'single letter or built-in keyword'
+#
+#   keycode      = 'apple keyboard kVK_<Key> values (0x3C)'
+#
+#   proc_map_lst = * <proc_map>
+#
+#   proc_map     = <string> ':' <command> | <string>     '~' |
+#                  '*'      ':' <command> | '*'          '~'
+#
+#   string       = '"' 'sequence of characters' '"'
+#
+#   command      = command is executed through '$SHELL -c' and
+#                  follows valid shell syntax. if the $SHELL environment
+#                  variable is not set, it will default to '/bin/bash'.
+#                  when bash is used, the ';' delimeter can be specified
+#                  to chain commands.
+#
+#                  to allow a command to extend into multiple lines,
+#                  prepend '\' at the end of the previous line.
+#
+#                  an EOL character signifies the end of the bind.
+#
+#   ->           = keypress is not consumed by skhd
+#
+#   *            = matches every application not specified in <proc_map_lst>
+#
+#   ~            = application is unbound and keypress is forwarded per usual, when specified in a <proc_map>
+#
+# A mode is declared according to the following rules:
+#
+#   mode_decl = '::' <name> '@' ':' <command> | '::' <name> ':' <command> |
+#               '::' <name> '@'               | '::' <name>
+#
+#   name      = desired name for this mode,
+#
+#   @         = capture keypresses regardless of being bound to an action
+#
+#   command   = command is executed through '$SHELL -c' and
+#               follows valid shell syntax. if the $SHELL environment
+#               variable is not set, it will default to '/bin/bash'.
+#               when bash is used, the ';' delimeter can be specified
+#               to chain commands.
+#
+#               to allow a command to extend into multiple lines,
+#               prepend '\' at the end of the previous line.
+#
+#               an EOL character signifies the end of the bind.
+
+# ############################################################### #
+# THE FOLLOWING SECTION CONTAIN SIMPLE MAPPINGS DEMONSTRATING HOW #
+# TO INTERACT WITH THE YABAI WM. THESE ARE SUPPOSED TO BE USED AS #
+# A REFERENCE ONLY, WHEN MAKING YOUR OWN CONFIGURATION..          #
+# ############################################################### #
+
+# focus window
+alt - j : yabai -m window --focus prev || yabai -m window --focus last
+alt - k : yabai -m window --focus next || yabai -m window --focus first
+
+# swap managed window
+shift + alt - j : yabai -m window --swap prev || yabai -m window --swap last
+shift + alt - k : yabai -m window --swap next || yabai -m window --swap first
+
+# move managed window
+# shift + cmd - h : yabai -m window --warp east
+
+# balance size of windows
+# shift + alt - 0 : yabai -m space --balance
+
+# make floating window fill screen
+# shift + alt - up     : yabai -m window --grid 1:1:0:0:1:1
+
+# make floating window fill left-half of screen
+# shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
+
+# create desktop, move window and follow focus - uses jq for parsing json (brew install jq)
+# shift + cmd - n : yabai -m space --create && \
+#                   index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
+#                   yabai_move_window_to_space.sh "${index}" && \
+#                   yabai_show_workspace.sh "${index}"
+
+# fast focus desktop
+# cmd + alt - x : yabai_show_workspace.sh recent
+# cmd + alt - 1 : yabai_show_workspace.sh 1
+
+# send window to desktop and follow focus
+# shift + cmd - z : yabai_move_window_to_space.sh next; yabai_show_workspace.sh next
+# shift + cmd - 2 : yabai_move_window_to_space.sh  2; yabai_show_workspace.sh 2
+
+# focus monitor
+# ctrl + alt - z  : yabai -m display --focus prev
+# ctrl + alt - 3  : yabai -m display --focus 3
+alt - w  : yabai -m display --focus 1
+alt - e  : yabai -m display --focus 2
+alt - r  : yabai -m display --focus 3
+
+# send window to monitor and follow focus
+# ctrl + cmd - c  : yabai -m window --display next; yabai -m display --focus next
+# ctrl + cmd - 1  : yabai -m window --display 1; yabai -m display --focus 1
+shift + alt - w  : yabai -m window --display 1
+shift + alt - e  : yabai -m window --display 2
+shift + alt - r  : yabai -m window --display 3
+
+# move floating window
+# shift + ctrl - a : yabai -m window --move rel:-20:0
+# shift + ctrl - s : yabai -m window --move rel:0:20
+
+# increase window size
+# shift + alt - a : yabai -m window --resize left:-20:0
+# shift + alt - w : yabai -m window --resize top:0:-20
+
+# decrease window size
+# shift + cmd - s : yabai -m window --resize bottom:0:-20
+# shift + cmd - w : yabai -m window --resize top:0:20
+
+# set insertion point in focused container
+# ctrl + alt - h : yabai -m window --insert west
+
+# toggle window zoom
+# alt - d : yabai -m window --toggle zoom-parent
+# alt - f : yabai -m window --toggle zoom-fullscreen
+
+# toggle window split type
+# alt - e : yabai -m window --toggle split
+alt - space : yabai -m window --toggle split
+
+# float / unfloat window and center on screen
+alt - t : yabai -m window --toggle float;\
+          yabai -m window --grid 4:4:1:1:2:2
+
+# toggle sticky(+float), topmost, picture-in-picture
+# alt - p : yabai -m window --toggle sticky;\
+#           yabai -m window --toggle topmost;\
+#           yabai -m window --toggle pip
+
+# Focus workspace
+ctrl - 1 : ~/bin/yabai_show_workspace.sh 1
+ctrl - 2 : ~/bin/yabai_show_workspace.sh 2
+ctrl - 3 : ~/bin/yabai_show_workspace.sh 3
+ctrl - 4 : ~/bin/yabai_show_workspace.sh 4
+ctrl - 5 : ~/bin/yabai_show_workspace.sh 5
+ctrl - 6 : ~/bin/yabai_show_workspace.sh 6
+ctrl - 7 : ~/bin/yabai_show_workspace.sh 7
+ctrl - 8 : ~/bin/yabai_show_workspace.sh 8
+ctrl - 9 : ~/bin/yabai_show_workspace.sh 9
+ctrl - 0 : ~/bin/yabai_show_workspace.sh 10
+ctrl + alt - 1 : ~/bin/yabai_show_workspace.sh 11
+ctrl + alt - 2 : ~/bin/yabai_show_workspace.sh 12
+ctrl + alt - 3 : ~/bin/yabai_show_workspace.sh 13
+ctrl + alt - 4 : ~/bin/yabai_show_workspace.sh 14
+ctrl + alt - 5 : ~/bin/yabai_show_workspace.sh 15
+ctrl + alt - 6 : ~/bin/yabai_show_workspace.sh 16
+ctrl + alt - 7 : ~/bin/yabai_show_workspace.sh 17
+ctrl + alt - 8 : ~/bin/yabai_show_workspace.sh 18
+ctrl + alt - 9 : ~/bin/yabai_show_workspace.sh 19
+ctrl + alt - 0 : ~/bin/yabai_show_workspace.sh 20
+
+# Move focused window to other workspace
+shift + alt - 1 : ~/bin/yabai_move_window_to_space.sh 1
+shift + alt - 2 : ~/bin/yabai_move_window_to_space.sh 2
+shift + alt - 3 : ~/bin/yabai_move_window_to_space.sh 3
+shift + alt - 4 : ~/bin/yabai_move_window_to_space.sh 4
+shift + alt - 5 : ~/bin/yabai_move_window_to_space.sh 5
+shift + alt - 6 : ~/bin/yabai_move_window_to_space.sh 6
+shift + alt - 7 : ~/bin/yabai_move_window_to_space.sh 7
+shift + alt - 8 : ~/bin/yabai_move_window_to_space.sh 8
+shift + alt - 9 : ~/bin/yabai_move_window_to_space.sh 9
+shift + alt - 0 : ~/bin/yabai_move_window_to_space.sh 10
+shift + alt + cmd - 1 : ~/bin/yabai_move_window_to_space.sh 11
+shift + alt + cmd - 2 : ~/bin/yabai_move_window_to_space.sh 12
+shift + alt + cmd - 3 : ~/bin/yabai_move_window_to_space.sh 13
+shift + alt + cmd - 4 : ~/bin/yabai_move_window_to_space.sh 14
+shift + alt + cmd - 5 : ~/bin/yabai_move_window_to_space.sh 15
+shift + alt + cmd - 6 : ~/bin/yabai_move_window_to_space.sh 16
+shift + alt + cmd - 7 : ~/bin/yabai_move_window_to_space.sh 17
+shift + alt + cmd - 8 : ~/bin/yabai_move_window_to_space.sh 18
+shift + alt + cmd - 9 : ~/bin/yabai_move_window_to_space.sh 19
+shift + alt + cmd - 0 : ~/bin/yabai_move_window_to_space.sh 20
