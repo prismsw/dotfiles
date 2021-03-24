@@ -4,4 +4,4 @@ IFS=$'\n\t'
 
 SPACE="$1"
 
-yabai -m window --space "space$SPACE"
+yabai -m window --space "$SPACE"
